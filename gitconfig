@@ -1,6 +1,0 @@
-[user]
-	name = John Liberty
-	email = libjackjl@gmail.com
-[lcore]
-[core]
-	excludesfile = /Users/jliberty/.gitignore_global
