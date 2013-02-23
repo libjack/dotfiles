@@ -1,3 +1,5 @@
+# should be able to add this by:
+# git config --global core.excludesfile '~/.gitignore_global
 # vim crap
 *.swp
 # Compiled source #
