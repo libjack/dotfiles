@@ -18,12 +18,18 @@ set smartcase             " UPPER only matches UPPER
 set ruler                 " Always show info along bottom.
 set autoindent            " auto-indent
 set tabstop=4             " tab spacing
-set softtabstop=4         " unify
-set shiftwidth=4          " indent/outdent by 4 columns
+set softtabstop=2         " unify
+set shiftwidth=2          " indent/outdent by 2 columns
+"set expandtab            " hitting tab in insert mode will produce the
+                          "      appropiate number of spaces
 set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
+
+set ai
+set mouse=a
+set wildmenu
 
 nmap \l :setlocal number!
 nmap \o :set paste!

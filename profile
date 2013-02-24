@@ -1,5 +1,4 @@
 
-#CVSROOT=:pserver:jliberty@a2b-echelon.roc.questra.com:/cvs;export CVSROOT
 export HISTFILESIZE=1500
 export HISTSIZE=500
 # if we're already setup for SQLPATH, let it ride... else get home (in windows)
@@ -10,32 +9,6 @@ export HISTSIZE=500
 #want to append as much as we can (not override)
 shopt -s histappend
 
-# some aliases
-alias po=pp
-alias pp=popd
-alias pu=pd
-alias pd=pushd
-alias rm='/bin/rm -i'
-alias rrm=/bin/rm
-alias pwd='dirs -l'
-alias ds='dirs -v'
-alias mv='/bin/mv -i'
-alias j='jobs -l'
-alias cp='/bin/cp -i'
-alias +x='chmod +x'
-alias +r='chmod +r'
-alias +w='chmod +w'
-#alias ls='ls -F --color'
-alias ls='ls -F'
-alias ll='ls -l'
-#alias lt='ls -lt --color=never'
-alias lt='ls -lt'
-#alias sqlplus='rlwrap -f ~/rlwrap/a2b-tables sqlplus'
-#alias ldd='cygcheck'
-#alias e='gnuclientw'
-#
-#eval `dircolors -b /etc/DIR_COLORS`
-#alias xt='xterm -geom 80x60 -sl 1000 -sb -rightbar -ms red -fg yellow -bg black -e /usr/bin/bash -l'
 
 # note the xterm escape sequences:
 #    * ESC]0;stringBEL -- Set icon name and window title to string
@@ -68,31 +41,6 @@ export PS1='\[\033]0;\u@\h:\w\007\033[0;33m\]: \!,$?(\j) ;\[\033[0m\] '
 #export PS1='\033]0;\u@\h:\w\007\[\033[0;33m\]: \!,$? ;\[\033[0m\] '
 
 
-# some functions
-function genv()
-{
-     /usr/bin/env | grep "$@"
-}
-
-function hex()
-{
-	echo "16o$1[0x]Ppq" | dc
-}
-function lth()
-{
-	ls -lt $* | head
-}
-
-function hs()
-{
-    history | grep $*
-}
-
-function e()
-{
-    /usr/local/bin/emacsclient -n $*
-}
-
 # Remove ':' from the the COMP_WORDBREAKS variable to change
 # readline's completion behavior so it does not break words to be
 # completed at colons. This allows completion of native windows paths
@@ -100,18 +48,7 @@ function e()
 #if [ -n "${COMP_WORDBREAKS}" ]; then COMP_WORDBREAKS=${COMP_WORDBREAKS//:/}; fi
 
 
-## we always like some news
-#fortune
-
-# some bash binding (should be in .inputrc, no?)
-# M-/ is bound to complete file, which I never use
-bind '"\e\/":dynamic-complete-history'
-# bind for M-p, M-n for history searching
-bind '"\ep":history-search-backward'
-bind '"\en":history-search-forward'
-
 export DEVTOOLS=/DevTools
-
 
 #export JAVA_HOME=/Library/Java/Home
 export JAVA_HOME=`/usr/libexec/java_home`
@@ -130,7 +67,7 @@ export JAVA_HOME=`/usr/libexec/java_home`
 #export PATH=$PLAY_HOME:$TYPESAFE_STACK/bin:$GROOVY_HOME/bin:$GRAILS_HOME/bin:$GRIFFON_HOME/bin:$GRADLE_HOME/bin:$DEVTOOLS/bin:$PATH
 export PATH=$DEVTOOLS/bin:$PATH
 
-
+[[ -r ~/.bashrc ]] && . ~/.bashrc
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/jliberty/.gvm/bin/gvm-init.sh" ]] && source "/Users/jliberty/.gvm/bin/gvm-init.sh"
