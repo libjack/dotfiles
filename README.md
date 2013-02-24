@@ -5,9 +5,10 @@ manage my dotfiles
 
 vim setup
 ---------
-curl -Sso ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+    curl -Sso ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 prepend to vimrc:
+
     execute pathogen#infect()
     runtime bundle/vim-pathogen/autoload/pathogen.vim
 
