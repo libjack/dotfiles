@@ -38,3 +38,6 @@ nmap \o :set paste!
 nmap \q :nohlsearch
 
 nmap \e :NERDTreeToggle
+
+nmap \m :set mouse=a
+nmap \M :set mouse=
