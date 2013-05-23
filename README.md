@@ -16,6 +16,7 @@ Pathogen lets all other plugins startup from within bundle directory
 also provides :Helptags to take care of docs
 
 other plugins loaded:
-* git clone https://github.com/Lokaltog/vim-powerline.git /bundle/vim-powerline
+* git clone https://github.com/Lokaltog/vim-powerline.git bundle/vim-powerline
 * git clone https://github.com/kien/ctrlp.vim.git bundle/ctrlp.vim
 * git clone https://github.com/scrooloose/nerdtree.git bundle/nerdtree
+* git clone https://github.com/scrooloose/nerdcommenter.git bundle/nerdcommenter

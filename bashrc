@@ -34,6 +34,14 @@ alias lt='ls -lt'
 #eval `dircolors -b /etc/DIR_COLORS`
 #alias xt='xterm -geom 80x60 -sl 1000 -sb -rightbar -ms red -fg yellow -bg black -e /usr/bin/bash -l'
 
+function vis()
+{
+  sp=$1
+  shift
+  vi +/$sp `grep -l $sp $*`
+}
+
+#
 # some functions
 function genv()
 {
@@ -58,5 +66,11 @@ function e()
 {
   /usr/local/bin/emacsclient -n $*
 }
+
+function dfscat ()
+{
+    hadoop dfs -cat $1/* | tr '\001\002\003' '|,='
+}
+
 
 
