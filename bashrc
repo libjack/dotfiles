@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+
+# Source global definitions
+#if [ -f /etc/bashrc ]; then
+	#. /etc/bashrc
+#fi
+
+
 # some bash binding (should be in .inputrc, no?)
 # M-/ is bound to complete file, which I never use
 bind '"\e\/":dynamic-complete-history'
