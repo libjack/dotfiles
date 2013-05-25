@@ -31,10 +31,16 @@ set ai
 set mouse=a
 set wildmenu
 
-nmap \l :setlocal number!
-nmap \o :set paste!
+nmap <leader>l :setlocal number!
+nmap <leader>o :set paste!
 
 " a way to turn off search matching
-nmap \q :nohlsearch
+nmap <leader>q :nohlsearch
 
-nmap \e :NERDTreeToggle
+nmap <leader>e :NERDTreeToggle
+
+" VimClojure
+let g:vimclojure#HighlightBuiltins = 1
+let g:vimclojure#ParenRainbow = 1
+"let g:vimclojure#WantNailgun = 1
+
