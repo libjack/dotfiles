@@ -38,6 +38,8 @@ nmap <leader>o :set paste!
 nmap <leader>q :nohlsearch
 
 nmap <leader>e :NERDTreeToggle
+nmap <leader>m :set mouse=a
+nmap <leader>M :set mouse=
 
 " VimClojure
 let g:vimclojure#HighlightBuiltins = 1
