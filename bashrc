@@ -37,12 +37,23 @@ alias ls='ls -F'
 alias ll='ls -l'
 #alias lt='ls -lt --color=never'
 alias lt='ls -lt'
-#alias sqlplus='rlwrap -f ~/rlwrap/a2b-tables sqlplus'
-#alias ldd='cygcheck'
 #alias e='gnuclientw'
 #
 #eval `dircolors -b /etc/DIR_COLORS`
 #alias xt='xterm -geom 80x60 -sl 1000 -sb -rightbar -ms red -fg yellow -bg black -e /usr/bin/bash -l'
+
+# some picked up from brettterpstra.com
+# share history between terminal sessions
+alias he="history -a" # export history
+alias hi="history -n" # import history
+
+# Get your current public IP
+alias ip="curl icanhazip.com"
+
+# list TODO/FIX lines from the current project
+alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
+
+
 
 function vis()
 {
@@ -82,5 +93,20 @@ function dfscat ()
     hadoop dfs -cat $1/* | tr '\001\002\003' '|,='
 }
 
+# want to do special handling for OS as well as extra local customizations
+#
+platform=unknown
+if [[ "$OSTYPE" == "darwin"* ]] ; then
+  platform=osx
+elif [[ "$OSTYPE" == "linux-gnu" ]] ; then
+  platform=linux
+fi
+if [[ -r .bashrc.$platform ]] ; then 
+  . .bashrc.$platform
+fi
+
+if [[ -r .bashrc.local ]] ; then
+  . .bashrc.local
+fi
 
 
