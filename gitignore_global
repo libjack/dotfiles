@@ -2,6 +2,7 @@
 # git config --global core.excludesfile '~/.gitignore_global
 # vim crap
 *.swp
+*.un~
 # Compiled source #
 ###################
 *.com
