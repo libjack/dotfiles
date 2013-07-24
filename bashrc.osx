@@ -1,0 +1,12 @@
+
+# couple OSX specific aliases
+alias chrome="open -a \"Google Chrome\""
+
+#copy output of last command to clipboard
+alias cl="fc -e -|pbcopy"
+
+# copy the working directory path
+alias cpwd='pwd|tr -d "\n"|pbcopy'
+
+# create a Taskpaper todo file in the current folder
+alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper'
