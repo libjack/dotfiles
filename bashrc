@@ -5,9 +5,9 @@
 
 
 # Source global definitions
-#if [ -f /etc/bashrc ]; then
-	#. /etc/bashrc
-#fi
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
 
 
 # some bash binding (should be in .inputrc, no?)
@@ -50,6 +50,8 @@ function vis()
   shift
   vi +/$sp `grep -l $sp $*`
 }
+
+function = () { echo "$*" | bc -l; }
 
 #
 # some functions
