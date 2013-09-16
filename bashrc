@@ -205,7 +205,8 @@ fmt_time () { #format time just the way I likes it
     date +"%l:%M:%S$meridiem"|sed 's/ //g'
 }
 pwdtail () { #returns the last 2 fields of the working directory
-    pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
+    # avoid any aliases
+    /bin/pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
 }
 chkload () { #gets the current 1m avg CPU load
     local CURRLOAD=`uptime|awk '{print $8}'`
