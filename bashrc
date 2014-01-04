@@ -77,9 +77,16 @@ function hex()
 {
   echo "16o$1[0x]Ppq" | dc
 }
+
+function gb()
+{
+  echo "4k$1 1024/1024/1024/n[GB]P[]pq" | dc
+}
+
+
 function lth()
 {
-  ls -lt $* | head
+  ls -lht $* | head
 }
 
 function hs()
