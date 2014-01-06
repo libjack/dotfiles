@@ -36,7 +36,9 @@ alias +w='chmod +w'
 alias ls='ls -F'
 alias ll='ls -l'
 #alias lt='ls -lt --color=never'
-alias lt='ls -lt'
+alias lt='ls -lht'
+alias l.='ls -d .* --color=auto'
+
 #alias e='gnuclientw'
 #
 #eval `dircolors -b /etc/DIR_COLORS`
