@@ -10,3 +10,29 @@ alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # create a Taskpaper todo file in the current folder
 alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper'
+
+# from brettterpstra.com
+
+# cd to the path of the front Finder window
+cdf() {
+	target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+	if [ "$target" != "" ]; then
+		cd "$target"; pwd
+	else
+		echo 'No Finder window found' >&2
+	fi
+}
+
+# open finder window at current location
+alias f='open -a Finder ./'
+
+function clip() {
+	type=`file "$1"|grep -c text`
+	if [ $type -gt 0 ]; then
+		cat "$@"|pbcopy
+		echo "Contents of $1 are in the clipboard."
+	else
+		echo "File \"$1\" is not plain text."
+	fi
+}
+

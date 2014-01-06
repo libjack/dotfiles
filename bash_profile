@@ -24,8 +24,8 @@ shopt -s checkwinsize
 ## some history customizations by jdl
 export HISTCONTROL=ignoredups:ignorespace
 export HISTFILE=~/.history
-export HISTFILESIZE=2000
-export HISTSIZE=2000
+export HISTFILESIZE=5000
+export HISTSIZE=2500
 #want to append as much as we can (not override)
 shopt -s histappend
 
