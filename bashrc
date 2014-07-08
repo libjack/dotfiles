@@ -104,6 +104,21 @@ function dfscat ()
     hadoop dfs -cat $1/* | tr '\001\002\003' '|,='
 }
 
+function dt ()
+{
+  local units=days
+  local offset=0
+  if [[ $# > 1 ]]; then
+    units=$2
+    offset=$1
+  elif [[ $# > 0 ]]; then
+    offset=$1
+  fi
+  if (( $offset > 0 )) ; then offset=$((- $offset)); fi
+  date -d "$offset $units" "+%Y%m%d"
+}
+
+
 # some from brettterpstra.com
 
 function console () {
