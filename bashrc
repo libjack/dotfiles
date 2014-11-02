@@ -191,7 +191,8 @@ fi
 ## handle the prompt
 ## export PS1='\[\033]0;\u@\h:\w\007\033[0;33m\]: \!,$?(\j) ;\[\033[0m\] '
 
-prompt_command () {
+
+xxx_prompt_command () {
     if [ $? -eq 0 ]; then # set an error string for the prompt, if applicable
         ERRPROMPT=" "
     else
@@ -217,6 +218,40 @@ prompt_command () {
     export PS1="\[${TITLEBAR}\]${CYAN}[ ${BCYAN}\u${GREEN}@${BCYAN}\
 \h${DKGRAY}(${LOAD}) ${WHITE}${TIME} ${CYAN}]${RED}$ERRPROMPT${GRAY}\
 \w\n${GREEN}: \!,\j ${BRANCH};${DEFAULT} "
+}
+
+prompt_command () {
+    local _status=$?
+
+    local GREEN="\[\033[0;32m\]"
+    local CYAN="\[\033[0;36m\]"
+    local BCYAN="\[\033[1;36m\]"
+    local BLUE="\[\033[0;34m\]"
+    local GRAY="\[\033[0;37m\]"
+    local DKGRAY="\[\033[1;30m\]"
+    local WHITE="\[\033[1;37m\]"
+    local RED="\[\033[0;31m\]"
+
+    local DEFAULT="\[\033[0;39m\]"
+
+    if [ "\$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
+        BRANCH="\$(__git_ps1 '[ %s ] ')"
+    else
+      BRANCH=
+    fi
+
+    #local TIME=$(fmt_time) # format time for prompt string
+    #local LOAD=`uptime|awk '{min=NF-2;print $min}'`
+    if [ $_status -eq 0 ]; then # set an error string for the prompt, if applicable
+        STATUS="$_status"
+    else
+        STATUS="${RED}$_status${DEFAULT}" # original of this used ', not sure why...
+    fi
+
+    # return color to Terminal setting for text color
+    # set the titlebar user@host + to the last 2 fields of pwd
+    local TITLEBAR='\[\e]2;\u@\h: \w\a'
+    export PS1="\[${TITLEBAR}\]${GREEN}: \!,${STATUS}${DKGRAY}#${GREEN}\j ${BRANCH};${DEFAULT} "
 }
 PROMPT_COMMAND=prompt_command
 
