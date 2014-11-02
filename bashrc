@@ -106,6 +106,21 @@ function dfscat ()
     hadoop dfs -cat $1/* | tr '\001\002\003' '|,='
 }
 
+function dt ()
+{
+  local units=days
+  local offset=0
+  if [[ $# > 1 ]]; then
+    units=$2
+    offset=$1
+  elif [[ $# > 0 ]]; then
+    offset=$1
+  fi
+  if (( $offset > 0 )) ; then offset=$((- $offset)); fi
+  date -d "$offset $units" "+%Y%m%d"
+}
+
+
 # some from brettterpstra.com
 
 function console () {
@@ -147,7 +162,7 @@ fp () { #find and list processes matching a case-insensitive partial-match strin
 		ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -i $1|grep -v grep
 }
 
-fk () { 
+fk () {
 	IFS=$'\n'
 	PS3='Kill which process? (1 to cancel): '
 	select OPT in "Cancel" $(fp $1); do
@@ -238,7 +253,7 @@ if [[ "$OSTYPE" == "darwin"* ]] ; then
 elif [[ "$OSTYPE" == "linux-gnu" ]] ; then
   platform=linux
 fi
-if [[ -r .bashrc.$platform ]] ; then 
+if [[ -r .bashrc.$platform ]] ; then
   . .bashrc.$platform
 fi
 
@@ -246,3 +261,5 @@ if [[ -r .bashrc.local ]] ; then
   . .bashrc.local
 fi
 
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon

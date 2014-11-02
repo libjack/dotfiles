@@ -29,7 +29,7 @@ set ruler                 " Always show info along bottom.
 set ttyfast
 set backspace=indent,eol,start
 "set relativenumber
-set undofile
+"set undofile
 set mouse=a               " I use file tabs, so having mouse work is nice
 set wildmenu
 set wildmode=list:longest
@@ -50,11 +50,18 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+"set colorcolumn=85
 
 " movement by file line!
 nnoremap j gj
 nnoremap k gk
+
+" grep/lgrep fun
+nnoremap <left>  :cprev<cr>zvzz
+nnoremap <right> :cnext<cr>zvzz
+nnoremap <up>    :lprev<cr>zvzz
+nnoremap <down>  :lnext<cr>zvzz
+
 
 nmap <leader>l :setlocal number!<cr>
 nmap <leader>rl :setlocal relativenumber!<cr>
@@ -65,8 +72,15 @@ nmap <leader>e :NERDTreeToggle
 nmap <leader>m :set mouse=a<cr>
 nmap <leader>M :set mouse=<cr>
 
-" VimClojure
-let g:vimclojure#HighlightBuiltins = 1
-let g:vimclojure#ParenRainbow = 1
-"let g:vimclojure#WantNailgun = 1
+nmap <leader>s :syntax off
+nmap <leader>S :syntax on
 
+" turn on nice tab markers
+let g:airline#extensions#tabline#enabled = 1
+" CtrlP mode
+" just the working directory
+let g:ctrlp_working_path_mode = 'c'
+
+" some list chars things
+" " still need to turn of list :set list!
+set listchars=tab:>-,trail:.
