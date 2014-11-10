@@ -34,9 +34,10 @@ alias +r='chmod +r'
 alias +w='chmod +w'
 #alias ls='ls -F --color'
 alias ls='ls -F'
-alias ll='ls -l'
+alias ll='ls -hl'
 #alias lt='ls -lt --color=never'
-alias lt='ls -lt'
+alias lt='ls -lht'
+alias l.='ls -d .* --color=auto'
 #alias e='gnuclientw'
 #
 #eval `dircolors -b /etc/DIR_COLORS`
@@ -53,7 +54,8 @@ alias ip="curl icanhazip.com"
 # list TODO/FIX lines from the current project
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
-alias psgrep="ps -Aco pid,comm | sed 's/^ *//'| sed 's/:/ /'|grep -iE"
+#alias psgrep="ps -Aco pid,comm | sed 's/^ *//'| sed 's/:/ /'|grep -iE"
+alias psgrep="ps -Ao pid,comm,args | sed 's/^ *//'| sed 's/:/ /'|grep -iE"
 
 
 
@@ -96,6 +98,21 @@ function dfscat ()
 {
     hadoop dfs -cat $1/* | tr '\001\002\003' '|,='
 }
+
+function dt ()
+{
+  local units=days
+  local offset=0
+  if [[ $# > 1 ]]; then
+    units=$2
+    offset=$1
+  elif [[ $# > 0 ]]; then
+    offset=$1
+  fi
+  if (( $offset > 0 )) ; then offset=$((- $offset)); fi
+  date -d "$offset $units" "+%Y%m%d"
+}
+
 
 # some from brettterpstra.com
 

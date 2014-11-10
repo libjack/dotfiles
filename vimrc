@@ -29,7 +29,7 @@ set ruler                 " Always show info along bottom.
 set ttyfast
 set backspace=indent,eol,start
 "set relativenumber
-set undofile
+"set undofile
 set mouse=a               " I use file tabs, so having mouse work is nice
 set wildmenu
 set wildmode=list:longest
@@ -50,7 +50,7 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+"set colorcolumn=85
 
 " movement by file line!
 nnoremap j gj
