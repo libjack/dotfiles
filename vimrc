@@ -56,6 +56,13 @@ set formatoptions=qrn1
 nnoremap j gj
 nnoremap k gk
 
+" grep/lgrep fun
+nnoremap <left>  :cprev<cr>zvzz
+nnoremap <right> :cnext<cr>zvzz
+nnoremap <up>    :lprev<cr>zvzz
+nnoremap <down>  :lnext<cr>zvzz
+
+
 nmap <leader>l :setlocal number!<cr>
 nmap <leader>rl :setlocal relativenumber!<cr>
 nmap <leader>o :set paste!
@@ -65,8 +72,28 @@ nmap <leader>e :NERDTreeToggle
 nmap <leader>m :set mouse=a<cr>
 nmap <leader>M :set mouse=<cr>
 
-" VimClojure
-let g:vimclojure#HighlightBuiltins = 1
-let g:vimclojure#ParenRainbow = 1
-"let g:vimclojure#WantNailgun = 1
+nmap <leader>s :syntax off
+nmap <leader>S :syntax on
+
+" turn on nice tab markers
+let g:airline#extensions#tabline#enabled = 1
+" CtrlP mode
+" just the working directory
+let g:ctrlp_working_path_mode = 'c'
+
+" some list chars things
+" " still need to turn of list :set list!
+set listchars=tab:>-,trail:.
+
+" some other useful functions
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>r :call RenameFile()<cr>
 

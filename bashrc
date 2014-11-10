@@ -79,9 +79,16 @@ function hex()
 {
   echo "16o$1[0x]Ppq" | dc
 }
+
+function gb()
+{
+  echo "4k$1 1024/1024/1024/n[GB]P[]pq" | dc
+}
+
+
 function lth()
 {
-  ls -lt $* | head
+  ls -lht $* | head
 }
 
 function hs()
@@ -155,7 +162,7 @@ fp () { #find and list processes matching a case-insensitive partial-match strin
 		ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -i $1|grep -v grep
 }
 
-fk () { 
+fk () {
 	IFS=$'\n'
 	PS3='Kill which process? (1 to cancel): '
 	select OPT in "Cancel" $(fp $1); do
@@ -184,7 +191,8 @@ fi
 ## handle the prompt
 ## export PS1='\[\033]0;\u@\h:\w\007\033[0;33m\]: \!,$?(\j) ;\[\033[0m\] '
 
-prompt_command () {
+
+xxx_prompt_command () {
     if [ $? -eq 0 ]; then # set an error string for the prompt, if applicable
         ERRPROMPT=" "
     else
@@ -211,6 +219,43 @@ prompt_command () {
 \h${DKGRAY}(${LOAD}) ${WHITE}${TIME} ${CYAN}]${RED}$ERRPROMPT${GRAY}\
 \w\n${GREEN}: \!,\j ${BRANCH};${DEFAULT} "
 }
+
+#PS1='\[\033]0;\u@\h:\w\007\033[0;33m\]: \!,$?#\j ;\[\033[0m\] '
+prompt_command () {
+    local _status=$?
+
+    local GREEN="\[\033[0;32m\]"
+    local CYAN="\[\033[0;36m\]"
+    local BCYAN="\[\033[1;36m\]"
+    local BLUE="\[\033[0;34m\]"
+    local GRAY="\[\033[0;37m\]"
+    local DKGRAY="\[\033[1;30m\]"
+    local WHITE="\[\033[1;37m\]"
+    local RED="\[\033[0;31m\]"
+    local YELLOW="\[\033[0;33m\]"
+
+    local DEFAULT="\[\033[0;39m\]"
+
+    if [ "\$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
+        BRANCH="\$(__git_ps1 '[ %s ] ')"
+    else
+      BRANCH=
+    fi
+
+    #local TIME=$(fmt_time) # format time for prompt string
+    #local LOAD=`uptime|awk '{min=NF-2;print $min}'`
+    if [ $_status -eq 0 ]; then # set an error string for the prompt, if applicable
+        STATUS="$_status"
+    else
+        STATUS="${RED}$_status${DEFAULT}" # original of this used ', not sure why...
+    fi
+
+    # return color to Terminal setting for text color
+    # set the titlebar user@host + working directory
+
+    local TITLEBAR='\[\e]2;\u@\h: \w\a'
+    export PS1="\[${TITLEBAR}\]${YELLOW}: \!,${STATUS}${YELLOW}[\j] ${GREEN}${BRANCH}${YELLOW};${DEFAULT} "
+}
 PROMPT_COMMAND=prompt_command
 
 fmt_time () { #format time just the way I likes it
@@ -222,7 +267,8 @@ fmt_time () { #format time just the way I likes it
     date +"%l:%M:%S$meridiem"|sed 's/ //g'
 }
 pwdtail () { #returns the last 2 fields of the working directory
-    pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
+    # avoid any aliases
+    /bin/pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
 }
 chkload () { #gets the current 1m avg CPU load
     local CURRLOAD=`uptime|awk '{print $8}'`
@@ -245,11 +291,13 @@ if [[ "$OSTYPE" == "darwin"* ]] ; then
 elif [[ "$OSTYPE" == "linux-gnu" ]] ; then
   platform=linux
 fi
-if [[ -r .bashrc.$platform ]] ; then 
-  . .bashrc.$platform
+if [[ -r .bashrc.$platform ]] ; then
+  source .bashrc.$platform
 fi
 
 if [[ -r .bashrc.local ]] ; then
-  . .bashrc.local
+  source .bashrc.local
 fi
 
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon

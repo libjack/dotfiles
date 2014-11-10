@@ -1,6 +1,6 @@
 
-export HISTFILESIZE=5000
-export HISTSIZE=2500
+export HISTFILESIZE=7500
+export HISTSIZE=5000
 # if we're already setup for SQLPATH, let it ride... else get home (in windows)
 #if [ -z "$SQLPATH" ]; then
 #    # we want this in windows for for sqlplus

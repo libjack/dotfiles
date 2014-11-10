@@ -24,14 +24,14 @@ shopt -s checkwinsize
 ## some history customizations by jdl
 export HISTCONTROL=ignoredups:ignorespace
 export HISTFILE=~/.history
-export HISTFILESIZE=5000
-export HISTSIZE=2500
+export HISTFILESIZE=7500
+export HISTSIZE=5000
 #want to append as much as we can (not override)
 shopt -s histappend
 
 
 # set variables for Hadoop
-export JAVA_HOME=/usr/local/java
+export JAVA_HOME=/usr/java/latest
 
 # User specific environment and startup programs
 export HADOOP_HOME=/usr/lib/hadoop
@@ -42,6 +42,6 @@ export HIVE_CONF_DIR=/etc/hive/conf_prod
 
 export NIS_HOME=/opt/nis
 
-PATH=$PATH:$HOME/bin
+PATH=$JAVA_HOME/bin:$PATH:$HOME/bin
 
 export PATH
