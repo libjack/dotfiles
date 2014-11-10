@@ -220,6 +220,7 @@ xxx_prompt_command () {
 \w\n${GREEN}: \!,\j ${BRANCH};${DEFAULT} "
 }
 
+#PS1='\[\033]0;\u@\h:\w\007\033[0;33m\]: \!,$?#\j ;\[\033[0m\] '
 prompt_command () {
     local _status=$?
 
@@ -231,6 +232,7 @@ prompt_command () {
     local DKGRAY="\[\033[1;30m\]"
     local WHITE="\[\033[1;37m\]"
     local RED="\[\033[0;31m\]"
+    local YELLOW="\[\033[0;33m\]"
 
     local DEFAULT="\[\033[0;39m\]"
 
@@ -249,9 +251,10 @@ prompt_command () {
     fi
 
     # return color to Terminal setting for text color
-    # set the titlebar user@host + to the last 2 fields of pwd
+    # set the titlebar user@host + working directory
+
     local TITLEBAR='\[\e]2;\u@\h: \w\a'
-    export PS1="\[${TITLEBAR}\]${GREEN}: \!,${STATUS}${DKGRAY}#${GREEN}\j ${BRANCH};${DEFAULT} "
+    export PS1="\[${TITLEBAR}\]${YELLOW}: \!,${STATUS}${YELLOW}[\j] ${GREEN}${BRANCH}${YELLOW};${DEFAULT} "
 }
 PROMPT_COMMAND=prompt_command
 
@@ -289,11 +292,11 @@ elif [[ "$OSTYPE" == "linux-gnu" ]] ; then
   platform=linux
 fi
 if [[ -r .bashrc.$platform ]] ; then
-  . .bashrc.$platform
+  source .bashrc.$platform
 fi
 
 if [[ -r .bashrc.local ]] ; then
-  . .bashrc.local
+  source .bashrc.local
 fi
 
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
