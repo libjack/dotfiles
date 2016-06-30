@@ -174,6 +174,39 @@ fk () {
 	unset IFS
 }
 
+# e.g: ps -fHww $(pidtree NNNN)
+function pidtree()
+{
+    [ -n "$ZSH_VERSION"  ] && setopt shwordsplit
+    declare -A CHILDS
+    while read P PP;do
+        CHILDS[$PP]+=" $P"
+    done < <(ps -e -o pid= -o ppid=)
+
+    walk() {
+        echo $1
+        for i in ${CHILDS[$1]};do
+            walk $i
+        done
+    }
+
+    for i in "$@";do
+        walk $i
+    done
+}
+
+
+# http://brettterpstra.com/2016/04/27/shell-tricks-shorten-every-line-of-output/
+# truncate each line of the input to X characters ($1)
+shorten () {
+  cat | sed -E "s/(.{${1-70}}).*(\.[^\.]+)?$/\1...\2/"
+}
+
+# truncate from left
+lshorten () {
+  cat | sed -E "s/.*(.{$((20-3))})$/...\1/"
+}
+
 
 ## look for some git things, can find these files at
 # https://github.com/git/git/tree/master/contrib/completion
