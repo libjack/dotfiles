@@ -19,7 +19,7 @@ other plugins loaded:
 * git clone https://github.com/Lokaltog/vim-powerline.git bundle/vim-powerline
 OR
 * git clone https://github.com/bling/vim-airline bundle/vim-airline
-* git clone https://github.com/kien/ctrlp.vim.git bundle/ctrlp.vim
+* git clone https://github.com/ctrlpvim/ctrlp.vim bundle/ctrlp.vim
 * git clone https://github.com/scrooloose/nerdtree.git bundle/nerdtree
 * git clone https://github.com/scrooloose/nerdcommenter.git bundle/nerdcommenter
 * git clone https://github.com/ntpeters/vim-better-whitespace.git bundle/vim-better-whitespace 
