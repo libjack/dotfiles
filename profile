@@ -70,4 +70,10 @@ export PATH=$DEVTOOLS/bin:$PATH
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/jliberty/.gvm/bin/gvm-init.sh" ]] && source "/Users/jliberty/.gvm/bin/gvm-init.sh"
+#[[ -s "/Users/jliberty/.gvm/bin/gvm-init.sh" ]] && source "/Users/jliberty/.gvm/bin/gvm-init.sh"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/jliberty/.sdkman"
+[[ -s "/Users/jliberty/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jliberty/.sdkman/bin/sdkman-init.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
